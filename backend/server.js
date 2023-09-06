@@ -2,12 +2,21 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const port = process.env.PORT || 8000;
 const colors = require("colors");
+const cors = require("cors");
 const connectDB = require("./Config/db");
 const { errorHandler } = require("./Middleware/errorMiddleware");
 
 connectDB();
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
