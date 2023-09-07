@@ -13,7 +13,7 @@ const app = express();
 app.use(
   cors({
     origin: "http://localhost:3000",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: "GET,POST",
     credentials: true,
   })
 );

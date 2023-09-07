@@ -34,7 +34,6 @@ const userRegister = asynchandler(async (req, res) => {
     throw new Error("Please fill a fields");
   }
 
-  //check user is unique
   const userExists = await User.findOne({ email });
 
   if (userExists) {
@@ -42,12 +41,8 @@ const userRegister = asynchandler(async (req, res) => {
     throw new Error("User Already Exists");
   }
 
-  //hash password
-
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-
-  //Create User
 
   const user = await User.create({
     firstName,
@@ -67,7 +62,6 @@ const userRegister = asynchandler(async (req, res) => {
   }
 });
 
-// Generate JWT Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "2d",
